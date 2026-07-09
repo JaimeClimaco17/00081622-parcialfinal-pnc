@@ -50,7 +50,7 @@ Existe un endpoint que devuelve la cantidad de libros disponibles por género. S
 
 **Instrucción:** Explique la causa del problema y resuélvalo.
 
-**Causa:** BookService.getGenresAvailable recorría todos los libros con bookRepository.findAll() y ejecutaba `book.getGenre().name()` para agruparlos. El libro "The Art of War" tiene genre = NULL en data.sql, por lo que getGenre() devolvía null y .name() lanzaba NullPointerException, tumbando el endpoint.
+**Causa:** BookService.getGenresAvailable recorría todos los libros con bookRepository.findAll() y ejecutaba `book.getGenre().name()` para agruparlos. 
 
 **Solución:** Se movió el conteo a una consulta JPQL (BookRepository.countByGenre) que agrupa directamente en la base de datos con GROUP BY b.genre y construye GenreCountDto mediante SELECT NEW.
 
